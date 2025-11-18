@@ -1,540 +1,370 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-    <meta charset="UTF-8" />
-    <title>Retailomatics</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailomatics - אוטומציה חכמה למגזר הקמעונאי</title>
     <style>
-        :root {
-            --bg: #f7f8fc;
-            --card-bg: #ffffff;
-            --text-main: #222222;
-            --text-muted: #5b667a;
-            --accent: #3ba3e5;
-            --accent-soft: rgba(59, 163, 229, 0.08);
-            --border-soft: #e1e4ee;
-            --radius-lg: 18px;
-            --radius-xl: 28px;
-            --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.08);
-        }
-
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            margin: 0;
-            font-family: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top left, #f0f7ff 0, #f7f8fc 40%, #ffffff 80%);
-            color: var(--text-main);
-        }
-
-        .page-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: stretch;
-            justify-content: center;
-            padding: 24px;
-        }
-
-        .shell {
-            width: 100%;
-            max-width: 1100px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.98));
-            border-radius: 32px;
-            box-shadow: var(--shadow-soft);
-            display: grid;
-            grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
-            gap: 32px;
-            padding: 26px 26px 24px;
-        }
-
-        @media (max-width: 900px) {
-            .shell {
-                grid-template-columns: minmax(0, 1fr);
-                padding: 20px;
-                border-radius: 26px;
-            }
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-mark {
-            width: 30px;
-            height: 30px;
-            border-radius: 999px;
-            background: var(--accent-soft);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .brand-name {
-            font-size: 1.35rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-        }
-
-        .brand-sub {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .lang-switch {
-            display: inline-flex;
-            background: var(--bg);
-            border-radius: 999px;
-            padding: 4px;
-            border: 1px solid var(--border-soft);
-        }
-
-        .lang-btn {
-            border: none;
-            background: transparent;
-            font-size: 0.85rem;
-            padding: 6px 12px;
-            border-radius: 999px;
-            cursor: pointer;
-            color: var(--text-muted);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.2s, color 0.2s, transform 0.1s;
-        }
-
-        .lang-btn span {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .lang-btn.active {
-            background: #ffffff;
-            color: var(--accent);
-            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
-            transform: translateY(-1px);
-        }
-
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--border-soft);
-            padding: 18px 20px 18px;
-            overflow: hidden;
-        }
-
-        .content-inner {
-            max-height: calc(100vh - 260px);
-            overflow-y: auto;
-            padding-right: 6px;
-        }
-
-        @media (max-width: 900px) {
-            .content-inner {
-                max-height: unset;
-            }
-        }
-
-        h1 {
-            margin: 0 0 14px;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        h2 {
-            font-size: 1.05rem;
-            margin: 20px 0 8px;
-            letter-spacing: 0.02em;
-        }
-
-        p {
-            margin: 6px 0 8px;
-            font-size: 0.93rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text-muted);
+            color: #333;
+            direction: rtl;
         }
-
-        ul {
-            margin: 6px 0 10px;
-            padding-left: 1.1em;
-            font-size: 0.93rem;
-            color: var(--text-muted);
+        
+        body.en {
+            direction: ltr;
         }
-
-        li {
-            margin-bottom: 4px;
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
         }
-
-        .separator {
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--border-soft), transparent);
-            margin: 14px 0 4px;
-        }
-
-        .tagline {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .hero-visual {
-            position: relative;
-            border-radius: 30px;
-            background: radial-gradient(circle at top, rgba(59, 163, 229, 0.18), transparent 55%),
-                        linear-gradient(135deg, #f9fbff, #eef5ff);
-            border: 1px solid var(--border-soft);
-            padding: 18px 18px 16px;
-            overflow: hidden;
-        }
-
-        .hero-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .hero-sub {
-            font-size: 0.86rem;
-            color: var(--text-muted);
+        
+        header h1 {
+            font-size: 3em;
             margin-bottom: 10px;
         }
-
-        .hero-pill {
+        
+        header .tagline {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            opacity: 0.95;
+        }
+        
+        .lang-switch {
+            margin-top: 20px;
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent-soft);
-            border-radius: 999px;
-            padding: 6px 10px;
-            font-size: 0.8rem;
-            color: var(--accent);
-            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 5px;
         }
-
-        .hero-pill span.icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            border-radius: 999px;
-            border: 1px solid rgba(59, 163, 229, 0.3);
-            font-size: 0.9rem;
+        
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s;
         }
-
-        .cart-illustration {
-            position: absolute;
-            right: -10px;
-            bottom: -6px;
-            width: 150px;
-            opacity: 0.7;
+        
+        .lang-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
         }
-
-        @media (max-width: 900px) {
-            .cart-illustration {
-                right: -14px;
-                width: 130px;
-            }
+        
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
         }
-
-        .pill-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
-
-        .mini-pill {
-            font-size: 0.78rem;
-            padding: 4px 9px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            color: #4b5563;
+        
+        .section {
+            margin-bottom: 50px;
         }
-
-        .contact-box {
-            margin-top: 8px;
-            padding-top: 10px;
-            border-top: 1px dashed rgba(148, 163, 184, 0.6);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
+        
+        .section h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 15px;
         }
-
-        .contact-box a {
-            color: var(--accent);
+        
+        .section p {
+            font-size: 1.1em;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            color: #555;
+        }
+        
+        ul {
+            font-size: 1.05em;
+            color: #555;
+            max-width: 900px;
+            margin: 20px auto;
+            padding-right: 20px;
+        }
+        
+        body.en ul {
+            padding-right: 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .contact {
+            background: #f8f9fa;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .contact h2 {
+            font-size: 2.2em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info {
+            font-size: 1.2em;
+            color: #555;
+        }
+        
+        .contact-info a {
+            color: #667eea;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
         }
-
-        .contact-box a:hover {
+        
+        .contact-info a:hover {
             text-decoration: underline;
         }
-
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
         .lang-section {
             display: none;
         }
-
+        
         .lang-section.active {
             display: block;
         }
-
-        .lang-he {
-            direction: rtl;
-            text-align: right;
-        }
-
-        .lang-en {
-            direction: ltr;
-            text-align: left;
-        }
-
-        .footer-note {
-            font-size: 0.78rem;
-            color: #9ca3af;
-            margin-top: 10px;
+        
+        .separator {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #e1e4ee, transparent);
+            margin: 40px auto;
+            max-width: 600px;
         }
     </style>
 </head>
 <body>
-<div class="page-wrapper">
-    <div class="shell">
+    <header>
+        <h1>Retailomatics</h1>
+        <div class="tagline lang-he">אוטומציה חכמה למגזר הקמעונאי</div>
+        <div class="tagline lang-en" style="display:none;">Smart Automation for Retail</div>
+        
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="he">עברית</button>
+            <button class="lang-btn" data-lang="en">English</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Hebrew Content -->
+        <div class="lang-section lang-he active">
+            <section class="section">
+                <h2>מי אנחנו</h2>
+                <p>
+                    החברה הוקמה במטרה להביא את מהפכת הטכנולוגיה והאוטומציה לעולם הקמעונאות הקטנה והבינונית.
+                    בזמן שברשתות הקמעונאות הגדולות מנצלים את העוצמה של מערכות ERP מתקדמות, ברוב החנויות הקטנות
+                    והבינוניות התפעול עדיין מתבצע באופן ידני: הקלדת תעודות משלוח, עדכון מלאי ומחירים, הזנת מוצרים
+                    חדשים ועוד.
+                </p>
+                <p>אנחנו כאן כדי לשנות את זה.</p>
+            </section>
 
-        <div>
-            <header class="header">
-                <div class="brand">
-                    <div class="brand-mark">
-                        <svg viewBox="0 0 40 40" width="24" height="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <line x1="4" y1="16" x2="20" y2="16" stroke="#3ba3e5" stroke-width="2.2" stroke-linecap="round" />
-                            <line x1="7" y1="22" x2="23" y2="22" stroke="#3ba3e5" stroke-width="2.2" stroke-linecap="round" />
-                            <path d="M14 10 L32 10 L29 22 L17 22 Z" fill="none" stroke="#3ba3e5" stroke-width="2.2" stroke-linejoin="round" />
-                            <circle cx="19" cy="26" r="2" fill="none" stroke="#3ba3e5" stroke-width="2" />
-                            <circle cx="27" cy="26" r="2" fill="none" stroke="#3ba3e5" stroke-width="2" />
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="brand-name">Retailomatics</div>
-                        <div class="brand-sub">Retail Automation for SMBs</div>
-                    </div>
-                </div>
-                <div class="lang-switch" aria-label="Language switch">
-                    <button class="lang-btn active" data-lang="he">
-                        <span>HE</span> עברית
-                    </button>
-                    <button class="lang-btn" data-lang="en">
-                        <span>EN</span> English
-                    </button>
-                </div>
-            </header>
+            <div class="separator"></div>
 
-            <div class="content-card">
-                <div class="content-inner lang-section lang-he active" id="lang-he">
-                    <div class="tagline">אוטומציה חכמה לריטייל</div>
-                    <h1>מי אנחנו</h1>
-                    <p>
-                        החברה הוקמה במטרה להביא את מהפכת הטכנולוגיה והאוטומציה לעולם הקמעונאות הקטנה והבינונית.
-                        בזמן שברשתות הקמעונאות הגדולות מנצלים את העוצמה של מערכות ERP מתקדמות, ברוב החנויות הקטנות
-                        והבינוניות התפעול עדיין מתבצע באופן ידני: הקלדת תעודות משלוח, עדכון מלאי ומחירים, הזנת מוצרים
-                        חדשים ועוד.
-                    </p>
-                    <p>אנחנו כאן כדי לשנות את זה.</p>
+            <section class="section">
+                <h2>מה אנחנו עושים</h2>
+                <p>
+                    באמצעות שילוב של טכנולוגיות מתקדמות ובינה מלאכותית, אנו מספקים ללקוחותינו שירות מקיף שמחליף
+                    עבודת ידיים סיזיפית בתהליכים אוטומטיים חכמים ומיצר מידע עסקי רלוונטי וקריטי להצלחת העסק.
+                </p>
+                <p>השירות שלנו כולל:</p>
+                <ul>
+                    <li>סריקת חשבוניות והזנה אוטומטית ל-ERP</li>
+                    <li>הקמת מוצרים חדשים, עדכון מלאי ומחירים</li>
+                    <li>הגדלת רווחיות ואופטימיזציית מלאי</li>
+                    <li>דוחות ניהוליים חכמים והמלצות להזמנות</li>
+                    <li>השוואת מחירים ותמחור</li>
+                    <li>ניהול תהליכי זיכוי ושינויי מחירים</li>
+                    <li>שירותי הנהלת חשבונות דיגיטליים</li>
+                    <li>התממשקות עם מערכות ERP של הקמעונאי</li>
+                </ul>
+            </section>
 
-                    <div class="separator"></div>
+            <div class="separator"></div>
 
-                    <h2>מה אנחנו עושים</h2>
-                    <p>
-                        באמצעות שילוב של טכנולוגיות מתקדמות ובינה מלאכותית, אנו מספקים ללקוחותינו שירות מקיף שמחליף
-                        עבודת ידיים סיזיפית בתהליכים אוטומטיים חכמים ומיצר מידע עסקי רלוונטי וקריטי להצלחת העסק.
-                    </p>
-                    <p>השירות שלנו כולל:</p>
-                    <ul>
-                        <li>סריקת חשבוניות והזנה אוטומטית ל-ERP</li>
-                        <li>הקמת מוצרים חדשים, עדכון מלאי ומחירים</li>
-                        <li>הגדלת רווחיות ואופטימיזציית מלאי</li>
-                        <li>דוחות ניהוליים חכמים והמלצות להזמנות</li>
-                        <li>השוואת מחירים ותמחור</li>
-                        <li>ניהול תהליכי זיכוי ושינויי מחירים</li>
-                        <li>שירותי הנהלת חשבונות דיגיטליים</li>
-                        <li>התממשקות עם מערכות ERP של הקמעונאי</li>
-                    </ul>
+            <section class="section">
+                <h2>היתרון שלנו</h2>
+                <p>
+                    למרות שקיימות אינספור טכנולוגיות, רוב הקמעונאים הקטנים אינם מנצלים את הכוח המסחרי שלהן.
+                </p>
+                <p>
+                    כאן טמון הערך שלנו: אנחנו לוקחים את המושכות, מנהלים עבורכם את כל ההיבט הטכנולוגי, ומאפשרים לכם –
+                    בעלי העסקים – להתמקד בניהול העסק והאסטרטגיה, בזמן שאנחנו דואגים לכל השאר.
+                </p>
+            </section>
 
-                    <div class="separator"></div>
+            <div class="separator"></div>
 
-                    <h2>היתרון שלנו</h2>
-                    <p>
-                        למרות שקיימות אינספור טכנולוגיות, רוב הקמעונאים הקטנים אינם מנצלים את הכוח המסחרי שלהן.
-                    </p>
-                    <p>
-                        כאן טמון הערך שלנו: אנחנו לוקחים את המושכות, מנהלים עבורכם את כל ההיבט הטכנולוגי, ומאפשרים לכם –
-                        בעלי העסקים – להתמקד בניהול העסק והאסטרטגיה, בזמן שאנחנו דואגים לכל השאר.
-                    </p>
+            <section class="section">
+                <h2>למה לבחור בנו?</h2>
+                <ul>
+                    <li>✔️ חוסכים כוח אדם ועלויות תפעול</li>
+                    <li>✔️ מבטיחים נתונים מדויקים ועדכניים</li>
+                    <li>✔️ מנגישים את המידע העסקי כדי להשפיע על רווחיות החנות</li>
+                    <li>✔️ מייצרים יתרון תחרותי אמיתי לעסקים קטנים ובינוניים</li>
+                </ul>
+            </section>
 
-                    <div class="separator"></div>
+            <div class="separator"></div>
 
-                    <h2>למה לבחור בנו?</h2>
-                    <ul>
-                        <li>חוסכים כוח אדם ועלויות תפעול</li>
-                        <li>מבטיחים נתונים מדויקים ועדכניים</li>
-                        <li>מנגישים את המידע העסקי כדי להשפיע על רווחיות החנות</li>
-                        <li>מייצרים יתרון תחרותי אמיתי לעסקים קטנים ובינוניים</li>
-                    </ul>
-
-                    <div class="separator"></div>
-
-                    <h2>החזון שלנו</h2>
-                    <p>
-                        להפוך את האוטומציה והבינה המלאכותית לנגישות לכל הקמעונאים הקטנים והבינוניים – ולהעניק להן את אותן
-                        יכולות טכנולוגיות מתקדמות שיש לשחקנים הגדולים.
-                    </p>
-
-                    <div class="contact-box">
-                        <span>צור קשר</span>
-                        <span>Email: <a href="mailto:shimri@retailomatics.com">shimri@retailomatics.com</a></span>
-                        <div class="footer-note">Retailomatics · Retail Automation for SMBs</div>
-                    </div>
-                </div>
-
-                <div class="content-inner lang-section lang-en" id="lang-en">
-                    <div class="tagline">Smart automation for retail</div>
-                    <h1>Who We Are</h1>
-                    <p>
-                        The company was founded with the mission of bringing the revolution of technology and automation to the
-                        world of small and medium-sized retail. While large retail chains take advantage of the power of advanced
-                        ERP systems, in most small and medium-sized stores operations are still handled manually: entering
-                        delivery notes, updating inventory and prices, adding new products, and more.
-                    </p>
-                    <p>We’re here to change that.</p>
-
-                    <div class="separator"></div>
-
-                    <h2>What We Do</h2>
-                    <p>
-                        By combining advanced technologies and artificial intelligence, we provide our clients with a
-                        comprehensive service that replaces tedious manual work with smart automated processes – and generates
-                        relevant, business-critical insights for success.
-                    </p>
-                    <p>Our services include:</p>
-                    <ul>
-                        <li>Automated invoice scanning and ERP entry</li>
-                        <li>Product setup, inventory and price updates</li>
-                        <li>Profitability growth and inventory optimization</li>
-                        <li>Smart management reports and order recommendations</li>
-                        <li>Price comparisons and pricing strategies</li>
-                        <li>Credit and price adjustment processes</li>
-                        <li>Digital bookkeeping services</li>
-                        <li>Seamless integration with retailers’ ERP systems</li>
-                    </ul>
-
-                    <div class="separator"></div>
-
-                    <h2>Our Advantage</h2>
-                    <p>
-                        Although countless technologies exist, most small retailers fail to harness their commercial power.
-                    </p>
-                    <p>
-                        That’s where our value lies: We take the reins, managing the entire technological side for you, so that as
-                        business owners you can focus on strategy and growth – while we handle everything else.
-                    </p>
-
-                    <div class="separator"></div>
-
-                    <h2>Why Choose Us?</h2>
-                    <ul>
-                        <li>Save labor and operational costs</li>
-                        <li>Ensure accurate and up-to-date data</li>
-                        <li>Make business information accessible and actionable for profitability</li>
-                        <li>Create a true competitive advantage for small and medium-sized businesses</li>
-                    </ul>
-
-                    <div class="separator"></div>
-
-                    <h2>Our Vision</h2>
-                    <p>
-                        To make automation and artificial intelligence accessible to every small and medium retailer – empowering
-                        them with the same advanced technological capabilities as the big players.
-                    </p>
-
-                    <div class="contact-box">
-                        <span>Contact</span>
-                        <span>Email: <a href="mailto:shimri@retailomatics.com">shimri@retailomatics.com</a></span>
-                        <div class="footer-note">Retailomatics · Retail Automation for SMBs</div>
-                    </div>
-                </div>
-            </div>
+            <section class="section">
+                <h2>החזון שלנו</h2>
+                <p>
+                    להפוך את האוטומציה והבינה המלאכותית לנגישות לכל הקמעונאים הקטנים והבינוניים – ולהעניק להן את אותן
+                    יכולות טכנולוגיות מתקדמות שיש לשחקנים הגדולים.
+                </p>
+            </section>
         </div>
 
-        <aside class="hero-visual">
-            <div class="hero-title">Retailomatics</div>
-            <div class="hero-sub">
-                Turning invoices, inventory and ERP work<br />
-                into smooth, automated retail flows.
-            </div>
+        <!-- English Content -->
+        <div class="lang-section lang-en">
+            <section class="section">
+                <h2>Who We Are</h2>
+                <p>
+                    The company was founded with the mission of bringing the revolution of technology and automation to the
+                    world of small and medium-sized retail. While large retail chains take advantage of the power of advanced
+                    ERP systems, in most small and medium-sized stores operations are still handled manually: entering
+                    delivery notes, updating inventory and prices, adding new products, and more.
+                </p>
+                <p>We're here to change that.</p>
+            </section>
 
-            <div class="hero-pill">
-                <span class="icon">⚡</span>
-                <span>From manual chaos to automated clarity</span>
-            </div>
+            <div class="separator"></div>
 
-            <div class="pill-group">
-                <div class="mini-pill">Invoice → ERP</div>
-                <div class="mini-pill">Smart inventory</div>
-                <div class="mini-pill">Retail analytics</div>
-                <div class="mini-pill">AI workflows</div>
-            </div>
+            <section class="section">
+                <h2>What We Do</h2>
+                <p>
+                    By combining advanced technologies and artificial intelligence, we provide our clients with a
+                    comprehensive service that replaces tedious manual work with smart automated processes – and generates
+                    relevant, business-critical insights for success.
+                </p>
+                <p>Our services include:</p>
+                <ul>
+                    <li>Automated invoice scanning and ERP entry</li>
+                    <li>Product setup, inventory and price updates</li>
+                    <li>Profitability growth and inventory optimization</li>
+                    <li>Smart management reports and order recommendations</li>
+                    <li>Price comparisons and pricing strategies</li>
+                    <li>Credit and price adjustment processes</li>
+                    <li>Digital bookkeeping services</li>
+                    <li>Seamless integration with retailers' ERP systems</li>
+                </ul>
+            </section>
 
-            <svg class="cart-illustration" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <line x1="4" y1="42" x2="70" y2="42" stroke="#3ba3e5" stroke-width="4" stroke-linecap="round" />
-                <line x1="16" y1="62" x2="82" y2="62" stroke="#3ba3e5" stroke-width="4" stroke-linecap="round" opacity="0.85" />
-                <line x1="30" y1="80" x2="88" y2="80" stroke="#3ba3e5" stroke-width="4" stroke-linecap="round" opacity="0.7" />
-                <path d="M60 30 L150 30 L138 70 L72 70 Z" fill="none" stroke="#3ba3e5" stroke-width="4" stroke-linejoin="round" />
-                <path d="M56 30 L44 8" fill="none" stroke="#3ba3e5" stroke-width="4" stroke-linecap="round" />
-                <circle cx="82" cy="88" r="8" fill="none" stroke="#3ba3e5" stroke-width="4" />
-                <circle cx="128" cy="88" r="8" fill="none" stroke="#3ba3e5" stroke-width="4" />
-            </svg>
-        </aside>
+            <div class="separator"></div>
+
+            <section class="section">
+                <h2>Our Advantage</h2>
+                <p>
+                    Although countless technologies exist, most small retailers fail to harness their commercial power.
+                </p>
+                <p>
+                    That's where our value lies: We take the reins, managing the entire technological side for you, so that as
+                    business owners you can focus on strategy and growth – while we handle everything else.
+                </p>
+            </section>
+
+            <div class="separator"></div>
+
+            <section class="section">
+                <h2>Why Choose Us?</h2>
+                <ul>
+                    <li>✔️ Save labor and operational costs</li>
+                    <li>✔️ Ensure accurate and up-to-date data</li>
+                    <li>✔️ Make business information accessible and actionable for profitability</li>
+                    <li>✔️ Create a true competitive advantage for small and medium-sized businesses</li>
+                </ul>
+            </section>
+
+            <div class="separator"></div>
+
+            <section class="section">
+                <h2>Our Vision</h2>
+                <p>
+                    To make automation and artificial intelligence accessible to every small and medium retailer – empowering
+                    them with the same advanced technological capabilities as the big players.
+                </p>
+            </section>
+        </div>
     </div>
-</div>
+    
+    <section class="contact">
+        <h2 class="lang-he">צור קשר</h2>
+        <h2 class="lang-en" style="display:none;">Contact</h2>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:shimri@retailomatics.com">shimri@retailomatics.com</a></p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Retailomatics · Retail Automation for SMBs</p>
+    </footer>
 
-<script>
-    document.querySelectorAll(".lang-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-            var lang = this.getAttribute("data-lang");
-
-            document.querySelectorAll(".lang-btn").forEach(function (b) {
-                b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+    <script>
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                
+                // Update active button
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update content sections
+                document.querySelectorAll('.lang-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.querySelector(`.lang-section.lang-${lang}`).classList.add('active');
+                
+                // Update direction
+                if (lang === 'he') {
+                    document.body.style.direction = 'rtl';
+                    document.body.classList.remove('en');
+                } else {
+                    document.body.style.direction = 'ltr';
+                    document.body.classList.add('en');
+                }
+                
+                // Update header tagline
+                document.querySelectorAll('.tagline').forEach(t => t.style.display = 'none');
+                document.querySelector(`.tagline.lang-${lang}`).style.display = 'block';
+                
+                // Update contact section headings visibility
+                document.querySelectorAll('.contact h2').forEach(el => {
+                    if (el.classList.contains(`lang-${lang}`)) {
+                        el.style.display = 'block';
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
             });
-
-            document.querySelectorAll(".lang-section").forEach(function (section) {
-                section.classList.toggle("active", section.id === "lang-" + lang);
-            });
-
-            document.documentElement.setAttribute("lang", lang === "he" ? "he" : "en");
         });
-    });
-</script>
+    </script>
 </body>
 </html>
