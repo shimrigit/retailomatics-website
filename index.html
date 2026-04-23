@@ -1,370 +1,507 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retailomatics - אוטומציה חכמה למגזר הקמעונאי</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            direction: rtl;
-        }
-        
-        body.en {
-            direction: ltr;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        
-        header .tagline {
-            font-size: 1.3em;
-            max-width: 700px;
-            margin: 0 auto 20px;
-            opacity: 0.95;
-        }
-        
-        .lang-switch {
-            margin-top: 20px;
-            display: inline-flex;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 5px;
-        }
-        
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.95em;
-            transition: all 0.3s;
-        }
-        
-        .lang-btn.active {
-            background: white;
-            color: #667eea;
-            font-weight: bold;
-        }
-        
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        
-        .section {
-            margin-bottom: 50px;
-        }
-        
-        .section h2 {
-            font-size: 2em;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-        
-        .section p {
-            font-size: 1.1em;
-            max-width: 900px;
-            margin: 0 auto 20px;
-            color: #555;
-        }
-        
-        ul {
-            font-size: 1.05em;
-            color: #555;
-            max-width: 900px;
-            margin: 20px auto;
-            padding-right: 20px;
-        }
-        
-        body.en ul {
-            padding-right: 0;
-            padding-left: 20px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        .contact {
-            background: #f8f9fa;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        .contact h2 {
-            font-size: 2.2em;
-            color: #667eea;
-            margin-bottom: 30px;
-        }
-        
-        .contact-info {
-            font-size: 1.2em;
-            color: #555;
-        }
-        
-        .contact-info a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-        
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .lang-section {
-            display: none;
-        }
-        
-        .lang-section.active {
-            display: block;
-        }
-        
-        .separator {
-            height: 2px;
-            background: linear-gradient(to right, transparent, #e1e4ee, transparent);
-            margin: 40px auto;
-            max-width: 600px;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Retailomatics – Smart Automation for Food Retail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LE4WQMD1DT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LE4WQMD1DT');
+    </script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<body>
-    <header>
-        <h1>Retailomatics</h1>
-        <div class="tagline lang-he">אוטומציה חכמה למגזר הקמעונאי</div>
-        <div class="tagline lang-en" style="display:none;">Smart Automation for Retail</div>
-        
-        <div class="lang-switch">
-            <button class="lang-btn active" data-lang="he">עברית</button>
-            <button class="lang-btn" data-lang="en">English</button>
+
+<body class="he" id="top">
+
+    <!-- ════ NAV ════ -->
+    <nav id="navbar">
+        <div class="nav-brand" onclick="smoothTo('#hero')">
+            <img id="nav-logo-en" class="nav-logo en" src="./assets/images/logo-en-white.png" alt="Retailomatics" />
+            <img id="nav-logo-he" class="nav-logo he" src="./assets/images/logo-he-white.png" alt="ריטיילומטיקס" />
         </div>
-    </header>
-    
-    <div class="container">
-        <!-- Hebrew Content -->
-        <div class="lang-section lang-he active">
-            <section class="section">
-                <h2>מי אנחנו</h2>
-                <p>
-                    החברה הוקמה במטרה להביא את מהפכת הטכנולוגיה והאוטומציה לעולם הקמעונאות הקטנה והבינונית.
-                    בזמן שברשתות הקמעונאות הגדולות מנצלים את העוצמה של מערכות ERP מתקדמות, ברוב החנויות הקטנות
-                    והבינוניות התפעול עדיין מתבצע באופן ידני: הקלדת תעודות משלוח, עדכון מלאי ומחירים, הזנת מוצרים
-                    חדשים ועוד.
-                </p>
-                <p>אנחנו כאן כדי לשנות את זה.</p>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>מה אנחנו עושים</h2>
-                <p>
-                    באמצעות שילוב של טכנולוגיות מתקדמות ובינה מלאכותית, אנו מספקים ללקוחותינו שירות מקיף שמחליף
-                    עבודת ידיים סיזיפית בתהליכים אוטומטיים חכמים ומיצר מידע עסקי רלוונטי וקריטי להצלחת העסק.
-                </p>
-                <p>השירות שלנו כולל:</p>
-                <ul>
-                    <li>סריקת חשבוניות והזנה אוטומטית ל-ERP</li>
-                    <li>הקמת מוצרים חדשים, עדכון מלאי ומחירים</li>
-                    <li>הגדלת רווחיות ואופטימיזציית מלאי</li>
-                    <li>דוחות ניהוליים חכמים והמלצות להזמנות</li>
-                    <li>השוואת מחירים ותמחור</li>
-                    <li>ניהול תהליכי זיכוי ושינויי מחירים</li>
-                    <li>שירותי הנהלת חשבונות דיגיטליים</li>
-                    <li>התממשקות עם מערכות ERP של הקמעונאי</li>
-                </ul>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>היתרון שלנו</h2>
-                <p>
-                    למרות שקיימות אינספור טכנולוגיות, רוב הקמעונאים הקטנים אינם מנצלים את הכוח המסחרי שלהן.
-                </p>
-                <p>
-                    כאן טמון הערך שלנו: אנחנו לוקחים את המושכות, מנהלים עבורכם את כל ההיבט הטכנולוגי, ומאפשרים לכם –
-                    בעלי העסקים – להתמקד בניהול העסק והאסטרטגיה, בזמן שאנחנו דואגים לכל השאר.
-                </p>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>למה לבחור בנו?</h2>
-                <ul>
-                    <li>✔️ חוסכים כוח אדם ועלויות תפעול</li>
-                    <li>✔️ מבטיחים נתונים מדויקים ועדכניים</li>
-                    <li>✔️ מנגישים את המידע העסקי כדי להשפיע על רווחיות החנות</li>
-                    <li>✔️ מייצרים יתרון תחרותי אמיתי לעסקים קטנים ובינוניים</li>
-                </ul>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>החזון שלנו</h2>
-                <p>
-                    להפוך את האוטומציה והבינה המלאכותית לנגישות לכל הקמעונאים הקטנים והבינוניים – ולהעניק להן את אותן
-                    יכולות טכנולוגיות מתקדמות שיש לשחקנים הגדולים.
-                </p>
-            </section>
+        <ul class="nav-links" style="font-size:15px;">
+            <li><a onclick="smoothTo('#who')"><span class="en">Who We Are</span><span class="he">מי אנחנו</span></a></li>
+            <li><a onclick="smoothTo('#services')"><span class="en">What We Do</span><span class="he">מה אנחנו עושים</span></a></li>
+            <li><a onclick="smoothTo('#what')"><span class="en">Automation Process</span><span class="he">תהליך האוטומציה בחנות</span></a></li>
+            <li><a onclick="smoothTo('#why')"><span class="en">Why Choose Us</span><span class="he">למה לבחור בנו</span></a></li>
+            <li><a onclick="smoothTo('#vision')"><span class="en">Our Vision</span><span class="he">החזון שלנו</span></a></li>
+            <li><a onclick="smoothTo('#contact')"><span class="en">Contact Us</span><span class="he">צרו קשר</span></a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="lang-pill">
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn active" id="btn-he" onclick="setLang('he')">עב</button>
+            </div>
         </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
 
-        <!-- English Content -->
-        <div class="lang-section lang-en">
-            <section class="section">
-                <h2>Who We Are</h2>
-                <p>
-                    The company was founded with the mission of bringing the revolution of technology and automation to the
-                    world of small and medium-sized retail. While large retail chains take advantage of the power of advanced
-                    ERP systems, in most small and medium-sized stores operations are still handled manually: entering
-                    delivery notes, updating inventory and prices, adding new products, and more.
-                </p>
-                <p>We're here to change that.</p>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>What We Do</h2>
-                <p>
-                    By combining advanced technologies and artificial intelligence, we provide our clients with a
-                    comprehensive service that replaces tedious manual work with smart automated processes – and generates
-                    relevant, business-critical insights for success.
-                </p>
-                <p>Our services include:</p>
-                <ul>
-                    <li>Automated invoice scanning and ERP entry</li>
-                    <li>Product setup, inventory and price updates</li>
-                    <li>Profitability growth and inventory optimization</li>
-                    <li>Smart management reports and order recommendations</li>
-                    <li>Price comparisons and pricing strategies</li>
-                    <li>Credit and price adjustment processes</li>
-                    <li>Digital bookkeeping services</li>
-                    <li>Seamless integration with retailers' ERP systems</li>
-                </ul>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>Our Advantage</h2>
-                <p>
-                    Although countless technologies exist, most small retailers fail to harness their commercial power.
-                </p>
-                <p>
-                    That's where our value lies: We take the reins, managing the entire technological side for you, so that as
-                    business owners you can focus on strategy and growth – while we handle everything else.
-                </p>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>Why Choose Us?</h2>
-                <ul>
-                    <li>✔️ Save labor and operational costs</li>
-                    <li>✔️ Ensure accurate and up-to-date data</li>
-                    <li>✔️ Make business information accessible and actionable for profitability</li>
-                    <li>✔️ Create a true competitive advantage for small and medium-sized businesses</li>
-                </ul>
-            </section>
-
-            <div class="separator"></div>
-
-            <section class="section">
-                <h2>Our Vision</h2>
-                <p>
-                    To make automation and artificial intelligence accessible to every small and medium retailer – empowering
-                    them with the same advanced technological capabilities as the big players.
-                </p>
-            </section>
+    <div class="mobile-nav" id="mobileNav">
+        <a onclick="smoothTo('#who');closeMobile()"><span class="en">Who We Are</span><span class="he">מי אנחנו</span></a>
+        <a onclick="smoothTo('#services');closeMobile()"><span class="en">What We Do</span><span class="he">מה אנחנו עושים</span></a>
+        <a onclick="smoothTo('#what');closeMobile()"><span class="en">Automation Process</span><span class="he">תהליך האוטומציה בחנות</span></a>
+        <a onclick="smoothTo('#why');closeMobile()"><span class="en">Why Choose Us</span><span class="he">למה לבחור בנו</span></a>
+        <a onclick="smoothTo('#vision');closeMobile()"><span class="en">Our Vision</span><span class="he">החזון שלנו</span></a>
+        <a onclick="smoothTo('#contact');closeMobile()"><span class="en">Contact Us</span><span class="he">צרו קשר</span></a>
+        <div class="mob-footer">
+            <div class="lang-pill">
+                <button class="lang-btn" id="mbtn-en" onclick="setLang('en');closeMobile()">EN</button>
+                <button class="lang-btn active" id="mbtn-he" onclick="setLang('he');closeMobile()">עב</button>
+            </div>
         </div>
     </div>
-    
-    <section class="contact">
-        <h2 class="lang-he">צור קשר</h2>
-        <h2 class="lang-en" style="display:none;">Contact</h2>
-        <div class="contact-info">
-            <p>Email: <a href="mailto:shimri@retailomatics.com">shimri@retailomatics.com</a></p>
+
+    <!-- ════ HERO ════ -->
+    <section id="hero">
+        <div class="hero-lines"></div>
+        <div class="hero-accent-bar"></div>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="hero-eyebrow rev en">Smart Automation for the Retail Sector</div>
+                <h1 class="rev"><span class="en">Retailomatics<br><span class="tg">Smart Automation for Retail</span></span><span
+                        class="he">ריטיילומטיקס<br><span class="tg">אוטומציה חכמה למגזר הקמעונאי</span></span></h1>
+                <p class="hero-desc rev en">Retailomatics provides smart automation services for food retailers — increasing profitability and saving time and money.</p>
+                <p class="hero-desc rev he">ריטיילומטיקס מספקת שרותי אוטומציה חכמה לקמעונאי מזון, מעלה רווחיות וחוסכת זמן וכסף.</p>
+            </div>
+            <div class="hero-visual rev-r">
+                <div class="hv-card">
+                    <div class="hv-card-hd">
+                        <div class="hv-ic"><i data-lucide="package"></i></div>
+                        <div>
+                            <div class="hv-title en">Automatic Delivery Note Entry</div>
+                            <div class="hv-title he">הכנסה אוטומטית של תעודות כניסה</div>
+                            <div class="hv-sub en">Directly to back office</div>
+                            <div class="hv-sub he">ישירות למשרד אחורי</div>
+                        </div>
+                    </div>
+                    <div class="hv-bar">
+                        <div class="hv-bf" style="width:75%"></div>
+                    </div>
+                    <div class="hv-row"><span class="en">Notes updated</span><span class="he">תעודות מעודכנות</span><strong>43 / 57</strong></div>
+                    <div class="hv-tags"><span class="hv-tag green en">✓ Connected</span><span class="hv-tag green he">✓
+                            מחובר</span><span class="hv-tag blue en">Real-time</span><span class="hv-tag blue he">זמן
+                            אמת</span></div>
+                </div>
+                <div class="hv-card">
+                    <div class="hv-card-hd">
+                        <div class="hv-ic"><i data-lucide="bar-chart-2"></i></div>
+                        <div>
+                            <div class="hv-title en">Location-Based Pricing Recommendation</div>
+                            <div class="hv-title he">המלצת תמחור מבוססת מיקום</div>
+                            <div class="hv-sub en">Cost change tracking</div>
+                            <div class="hv-sub he">מעקב שינוי עלויות</div>
+                        </div>
+                    </div>
+                    <div class="hv-spark">
+                        <div class="sp" style="height:45%"></div>
+                        <div class="sp" style="height:62%"></div>
+                        <div class="sp" style="height:55%"></div>
+                        <div class="sp" style="height:80%"></div>
+                        <div class="sp" style="height:70%"></div>
+                        <div class="sp" style="height:90%"></div>
+                        <div class="sp" style="height:75%"></div>
+                    </div>
+                    <div class="hv-row" style="margin-top:10px"><span class="en">Margin improvement</span><span
+                            class="he">שיפור רווחיות</span><strong style="color:#4ade80">↑ +12.4%</strong></div>
+                </div>
+                <div class="hv-card">
+                    <div class="hv-card-hd">
+                        <div class="hv-ic"><i data-lucide="dollar-sign"></i></div>
+                        <div>
+                            <div class="hv-title en">Automatic Collection Reminders</div>
+                            <div class="hv-title he">תזכורות גביה אוטומטיות</div>
+                            <div class="hv-sub en">Directly to customers</div>
+                            <div class="hv-sub he">ישירות ללקוחות</div>
+                        </div>
+                    </div>
+                    <div class="hv-bar">
+                        <div class="hv-bf" style="animation:bAnim 4s ease-in-out infinite 1s"></div>
+                    </div>
+                    <div class="hv-row"><span class="en">Debt status</span><span class="he">סטאטוס חוב</span><strong><span class="en">Collection: ₪10,534</span><span class="he">גביה 10,534 ש"ח</span></strong></div>
+                    <div class="hv-tags"><span class="hv-tag green en">Ready</span><span
+                            class="hv-tag green he">מוכן</span><span class="hv-tag blue en">Debt Analysis</span><span
+                            class="hv-tag blue he">ניתוח חוב</span></div>
+                </div>
+            </div>
         </div>
     </section>
-    
+
+    <!-- ════ WHO ════ -->
+    <section id="who">
+        <div class="section-wrap">
+            <div class="who-inner">
+                <div class="who-text">
+                    <div class="eyebrow rev en">Who We Are</div>
+                    <div class="eyebrow rev he">מי אנחנו</div>
+                    <h2 class="rev en">Technological Operations Service for the Private Retail Sector</h2>
+                    <h2 class="rev he">שרות תפעולי טכנולוגי למגזר הקמעונאי הפרטי</h2>
+                    <p class="lead rev en">Retailomatics was founded with the goal of bringing the technology and automation revolution to the private retail sector. While large retail chains leverage the power of advanced ERP systems, most small and medium-sized stores still operate manually: entering delivery notes, updating inventory and prices, adding new products, and more.</p>
+                    <p class="lead rev he">החברה הוקמה במטרה להביא את מהפכת הטכנולוגיה והאוטומציה למגזר הקמעונאי הפרטי. בזמן שברשתות הקמעונאות הגדולות מנצלים את העוצמה של מערכות ERP מתקדמות, ברוב החנויות הקטנות והבינוניות התפעול עדיין מתבצע באופן ידני: הקלדת תעודות כניסה, עדכון מלאי ומחירים, הזנת מוצרים חדשים ועוד.</p>
+                </div>
+                <div class="who-visual rev-r">
+                    <div class="who-stat-items">
+                        <div class="who-si">
+                            <div class="ic-box navy sm"><i data-lucide="zap"></i></div>
+                            <div class="who-si-tx en">Bridging the Technology Gap</div>
+                            <div class="who-si-tx he">מגשרים על הפער הטכנולוגי</div>
+                        </div>
+                        <div class="who-si">
+                            <div class="ic-box navy sm"><i data-lucide="settings"></i></div>
+                            <div class="who-si-tx en">Automation for Retail Operations</div>
+                            <div class="who-si-tx he">אוטומציה לפעילות קמעונאית</div>
+                        </div>
+                        <div class="who-si">
+                            <div class="ic-box navy sm"><i data-lucide="dollar-sign"></i></div>
+                            <div class="who-si-tx en">High Value for the Private Sector</div>
+                            <div class="who-si-tx he">ערך גבוה למגזר הפרטי</div>
+                        </div>
+                        <div class="who-si">
+                            <div class="ic-box navy sm"><i data-lucide="refresh-cw"></i></div>
+                            <div class="who-si-tx en">Always Up-to-Date Back Office DATA</div>
+                            <div class="who-si-tx he">שמירת DATA משרד אחורי מעודכן תמידית</div>
+                        </div>
+                        <div class="who-si">
+                            <div class="ic-box navy sm"><i data-lucide="trending-up"></i></div>
+                            <div class="who-si-tx en">Business Insights &amp; Profitability Improvement</div>
+                            <div class="who-si-tx he">תובנות עסקיות ושיפור רווחיות</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ════ SERVICES ════ -->
+    <section id="services">
+        <div class="section-wrap">
+            <div class="eyebrow rev en">What We Do</div>
+            <div class="eyebrow rev he">מה אנחנו עושים</div>
+            <h2 class="rev en">Comprehensive Tech Service That Saves Time and Money</h2>
+            <h2 class="rev he">שרות טכנולוגי מקיף שחוסך זמן והרבה כסף</h2>
+            <p class="lead rev en">By combining advanced technologies and artificial intelligence, we provide our clients with a comprehensive service that replaces tedious manual work with smart automated processes and generates relevant, critical business intelligence for business success.</p>
+            <p class="lead rev he">באמצעות שילוב של טכנולוגיות מתקדמות ובינה מלאכותית, אנו מספקים ללקוחותינו שירות מקיף שמחליף עבודת ידיים סיזיפית בתהליכים אוטומטיים חכמים ומיצר מידע עסקי רלוונטי וקריטי להצלחת העסק.</p>
+            <div class="srv-grid" style="margin-top:40px">
+                <div class="srv-card rev" data-d="1">
+                    <div class="srv-ic">
+                        <div class="ic-box blue"><i data-lucide="file-text"></i></div>
+                    </div>
+                    <div class="srv-ti en">Delivery Note Intake</div>
+                    <div class="srv-ti he">קליטת תעודות כניסה</div>
+                    <div class="srv-de en">Scanning delivery notes and automatic entry into the back office.</div>
+                    <div class="srv-de he">סריקת תעודות והזנה אוטומטית למשרד אחורי</div>
+                </div>
+                <div class="srv-card rev" data-d="2">
+                    <div class="srv-ic">
+                        <div class="ic-box blue"><i data-lucide="package-plus"></i></div>
+                    </div>
+                    <div class="srv-ti en">New Product Setup</div>
+                    <div class="srv-ti he">הקמת מוצרים חדשים</div>
+                    <div class="srv-de en">Automatically updating and pricing new products from delivery notes.</div>
+                    <div class="srv-de he">מעדכנים ומתמחרים באופן אוטומטי מוצרים חדשים מתעודת כניסה</div>
+                </div>
+                <div class="srv-card rev" data-d="3">
+                    <div class="srv-ic">
+                        <div class="ic-box blue"><i data-lucide="tag"></i></div>
+                    </div>
+                    <div class="srv-ti en">Pricing</div>
+                    <div class="srv-ti he">תמחור</div>
+                    <div class="srv-de en">Automatic update of product prices based on supplier cost changes, department margin and prices at nearby stores.</div>
+                    <div class="srv-de he">עדכון אוטומטי של מחירי מוצרים בהתאם לשינוי עלויות ספקי, רווח למחלקה ומחירים בחנויות קרובות</div>
+                </div>
+                <div class="srv-card rev" data-d="1">
+                    <div class="srv-ic">
+                        <div class="ic-box blue"><i data-lucide="bar-chart-2"></i></div>
+                    </div>
+                    <div class="srv-ti en">Profitability Automation</div>
+                    <div class="srv-ti he">אוטומציית רווחיות</div>
+                    <div class="srv-de en">Identifying price gaps and profitability in monthly reports.</div>
+                    <div class="srv-de he">זיהוי פערי מחירים ורווחיות בדוחות חודשיים</div>
+                </div>
+                <div class="srv-card rev" data-d="2">
+                    <div class="srv-ic">
+                        <div class="ic-box blue"><i data-lucide="clipboard-list"></i></div>
+                    </div>
+                    <div class="srv-ti en">Order Recommendation</div>
+                    <div class="srv-ti he">המלצת הזמנה</div>
+                    <div class="srv-de en">Based on inventory intake and an up-to-date back office.</div>
+                    <div class="srv-de he">מבוססת קליטת מלאי ומשרד אחורי מעודכן</div>
+                </div>
+                <div class="srv-card rev" data-d="3">
+                    <div class="srv-ic">
+                        <div class="ic-box blue"><i data-lucide="hand-coins"></i></div>
+                    </div>
+                    <div class="srv-ti en">Collection Assistance</div>
+                    <div class="srv-ti he">סיוע לגביה</div>
+                    <div class="srv-de en">Customer debt analysis and automated collection information.</div>
+                    <div class="srv-de he">ניתוח חובות לקוחות ואוטומציית מידע לגביה</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ════ WHAT ════ -->
+    <section id="what">
+        <div class="what-inner">
+            <div class="eyebrow rev en">Automation Process</div>
+            <div class="eyebrow rev he">תהליך האוטומציה בחנות</div>
+            <h2 class="rev en">The Store Automation Process</h2>
+            <h2 class="rev he">תהליך האוטומציה בחנות</h2>
+            <p class="lead rev en">From scanning invoices and delivery notes to pricing, reports, inventory and orders — full automation of daily operations.</p>
+            <p class="lead rev he">מסריקת חשבוניות ותעודות כניסה ועד תמחור, דוחות, מלאי והזמנות — אוטומציה מלאה של התפעול היומיומי</p>
+            <div class="flow-layout">
+                <div class="flow-steps">
+                    <div class="fstep active" data-s="0">
+                        <div class="fstep-bar"></div>
+                        <div class="fstep-num">01</div>
+                        <div class="fstep-body">
+                            <div class="fstep-ti en">Photo of Delivery Note &amp; Send via WhatsApp/Email</div>
+                            <div class="fstep-ti he">צילום של תעודת כניסה בחנות ושליחה בוואטסאפ/מייל</div>
+                            <div class="fstep-de en">Image received.</div>
+                            <div class="fstep-de he">תמונה מתקבלת</div>
+                        </div>
+                    </div>
+                    <div class="fstep" data-s="1">
+                        <div class="fstep-bar"></div>
+                        <div class="fstep-num">02</div>
+                        <div class="fstep-body">
+                            <div class="fstep-ti en">OCR Conversion of Image to Text</div>
+                            <div class="fstep-ti he">הפיכה של התמונה לקובץ טקסטואלי ב OCR</div>
+                            <div class="fstep-de en">Document data validated.</div>
+                            <div class="fstep-de he">נתוני תעודה מאומתים</div>
+                        </div>
+                    </div>
+                    <div class="fstep" data-s="2">
+                        <div class="fstep-bar"></div>
+                        <div class="fstep-num">03</div>
+                        <div class="fstep-body">
+                            <div class="fstep-ti en">Comparing Note to Back-Office Item Data</div>
+                            <div class="fstep-ti he">השוואת תעודה לנתוני פריטים במשרד אחורי</div>
+                            <div class="fstep-de en">Price and product gaps identified.</div>
+                            <div class="fstep-de he">זיהוי פערים במחירים ומוצרים</div>
+                        </div>
+                    </div>
+                    <div class="fstep" data-s="3">
+                        <div class="fstep-bar"></div>
+                        <div class="fstep-num">04</div>
+                        <div class="fstep-body">
+                            <div class="fstep-ti en">Inventory &amp; Cost Price Update</div>
+                            <div class="fstep-ti he">עדכון מלאי ומחירי עלות</div>
+                            <div class="fstep-de en">Back office updated — inventory &amp; costs.</div>
+                            <div class="fstep-de he">משרד אחורי מעודכן מלאי ועלויות</div>
+                        </div>
+                    </div>
+                    <div class="fstep" data-s="4">
+                        <div class="fstep-bar"></div>
+                        <div class="fstep-num">05</div>
+                        <div class="fstep-body">
+                            <div class="fstep-ti en">Product Price Update &amp; New Product Setup</div>
+                            <div class="fstep-ti he">עדכון מחירי מוצרים והקמת מוצרים</div>
+                            <div class="fstep-de en">Back office updated — sale prices &amp; products.</div>
+                            <div class="fstep-de he">משרד אחורי מעודכן מחירי מכירה ומוצרים</div>
+                        </div>
+                    </div>
+                    <div class="fstep" data-s="5">
+                        <div class="fstep-bar"></div>
+                        <div class="fstep-num">06</div>
+                        <div class="fstep-body">
+                            <div class="fstep-ti en">Profitability, Inventory &amp; Sales Rate Analysis</div>
+                            <div class="fstep-ti he">ניתוח רווחיות, מלאי וקצב מכירות</div>
+                            <div class="fstep-de en">Inventory level and order recommendation.</div>
+                            <div class="fstep-de he">המלצת רמות מלאי והזמנה</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-graphic rev-r">
+                    <div class="fg-screen">
+                        <div class="fv-s" data-s="0">
+                            <div class="fv-ic"><i data-lucide="camera"></i></div>
+                            <div class="fv-tx en">Receiving delivery note photo</div>
+                            <div class="fv-tx he">תמונה מתקבלת</div>
+                        </div>
+                        <div class="fv-s" data-s="1">
+                            <div class="fv-ic"><i data-lucide="scan"></i></div>
+                            <div class="fv-tx en">Running OCR</div>
+                            <div class="fv-tx he">נתוני תעודה מאומתים</div>
+                        </div>
+                        <div class="fv-s" data-s="2">
+                            <div class="fv-ic"><i data-lucide="git-compare"></i></div>
+                            <div class="fv-tx en">Identifying gaps</div>
+                            <div class="fv-tx he">זיהוי פערים במחירים ומוצרים</div>
+                        </div>
+                        <div class="fv-s" data-s="3">
+                            <div class="fv-ic"><i data-lucide="refresh-cw"></i></div>
+                            <div class="fv-tx en">Updating inventory &amp; costs</div>
+                            <div class="fv-tx he">משרד אחורי מעודכן מלאי ועלויות</div>
+                        </div>
+                        <div class="fv-s" data-s="4">
+                            <div class="fv-ic"><i data-lucide="tag"></i></div>
+                            <div class="fv-tx en">Updating prices &amp; products</div>
+                            <div class="fv-tx he">משרד אחורי מעודכן מחירי מכירה ומוצרים</div>
+                        </div>
+                        <div class="fv-s" data-s="5">
+                            <div class="fv-ic"><i data-lucide="bar-chart-2"></i></div>
+                            <div class="fv-tx en">Recommending orders</div>
+                            <div class="fv-tx he">המלצת רמות מלאי והזמנה</div>
+                        </div>
+                    </div>
+                    <div class="fp-track">
+                        <div class="fp-fill" id="fpFill"></div>
+                    </div>
+                    <div class="fstat" id="fStatEn">Receiving delivery note photo</div>
+                    <div class="fstat" id="fStatHe" style="display:none">תמונה מתקבלת</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+                <!-- Step 1 -->
+
+    <div class="divider"></div>
+
+    <!-- ════ WHY ════ -->
+    <section id="why">
+        <div class="why-inner">
+            <div class="eyebrow rev en">Why Choose Us</div>
+            <div class="eyebrow rev he">למה לבחור בנו</div>
+            <h2 class="rev en">Built for the Private Retail Sector.<br><span class="tg">Works in the Field.</span></h2>
+            <h2 class="rev he">בנוי למגזר הקמעונאי הפרטי.<br><span class="tg">עובד בשטח.</span></h2>
+            <p class="lead rev en">Despite countless technologies available, most small retailers don't leverage their commercial power.<br><br>This is where our value lies: we provide a technology-based service, enabling you — the business owners — to focus on managing the business and strategy, while we take care of everything else.</p>
+            <p class="lead rev he">למרות שקיימות אינספור טכנולוגיות, רוב הקמעונאים הקטנים אינם מנצלים את הכוח המסחרי שלהם.<br><br>כאן טמון הערך שלנו: אנחנו מספקים שרות מבוסס טכנולוגיה, ומאפשרים לכם – בעלי העסקים – להתמקד בניהול העסק והאסטרטגיה, בזמן שאנחנו דואגים לכל השאר.</p>
+            <div class="why-grid">
+                <div class="why-card rev" data-d="1">
+                    <div class="why-ic">
+                        <div class="ic-box gold"><i data-lucide="users-round"></i></div>
+                    </div>
+                    <div class="why-ti en">Save Manpower and Operating Costs</div>
+                    <div class="why-ti he">חוסכים כוח אדם ועלויות תפעול</div>
+                    <div class="why-de en">Automation replaces hours of manual work — reducing labor costs and operational overhead significantly.</div>
+                    <div class="why-de he">האוטומציה מחליפה שעות עבודה ידנית — מפחיתה עלויות כוח אדם ותפעול באופן משמעותי.</div>
+                </div>
+                <div class="why-card rev" data-d="2">
+                    <div class="why-ic">
+                        <div class="ic-box gold"><i data-lucide="shield-check"></i></div>
+                    </div>
+                    <div class="why-ti en">Accurate and Up-to-Date Data</div>
+                    <div class="why-ti he">מבטיחים נתונים מדויקים ועדכניים</div>
+                    <div class="why-de en">Real-time synchronization ensures your back office always reflects the current state of inventory, prices and products.</div>
+                    <div class="why-de he">סנכרון בזמן אמת מבטיח שהמשרד האחורי תמיד משקף את המצב העדכני של המלאי, המחירים והמוצרים.</div>
+                </div>
+                <div class="why-card rev" data-d="3">
+                    <div class="why-ic">
+                        <div class="ic-box gold"><i data-lucide="trending-up"></i></div>
+                    </div>
+                    <div class="why-ti en">Business Insights That Impact Profitability</div>
+                    <div class="why-ti he">מנגישים את המידע העסקי ומשפיעים על רווחיות החנות</div>
+                    <div class="why-de en">Clear reports and analytics that highlight opportunities to improve margins and grow your bottom line.</div>
+                    <div class="why-de he">דוחות ואנליטיקה ברורים שמאירים הזדמנויות לשיפור מרווחים וצמיחת הרווחיות.</div>
+                </div>
+                <div class="why-card rev" data-d="4">
+                    <div class="why-ic">
+                        <div class="ic-box gold"><i data-lucide="trophy"></i></div>
+                    </div>
+                    <div class="why-ti en">Real Competitive Advantage for SMBs</div>
+                    <div class="why-ti he">מייצרים יתרון תחרותי אמיתי לעסקים קטנים ובינוניים</div>
+                    <div class="why-de en">Level the playing field with large chains — operate with the same technological capabilities at a fraction of the cost.</div>
+                    <div class="why-de he">השוו את הרמה עם רשתות גדולות — פעלו באותן יכולות טכנולוגיות בשבריר מהעלות.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════ VISION ════ -->
+    <section id="vision">
+        <div class="section-wrap">
+            <div class="vis-inner">
+                <div class="eyebrow rev en">Our Vision</div>
+                <div class="eyebrow rev he">החזון שלנו</div>
+                <h2 class="rev en">Technological Empowerment for the Private Sector</h2>
+                <h2 class="rev he">העצמה טכנולוגית למגזר הפרטי</h2>
+                <p class="lead rev en">To make automation and AI the standard in the private retail sector — giving it the same capabilities as the large chains.</p>
+                <p class="lead rev he" style="text-align:center;">הפיכת האוטומציה והבינה המלאכותית לסטנדרט במגזר הקמעונאי הפרטי עם אותן יכולות של הרשתות הגדולות</p>
+                <div class="vis-cards">
+                    <div class="vis-card rev" data-d="1">
+                        <div class="vis-ico">
+                            <div class="ic-box blue"><i data-lucide="bot"></i></div>
+                        </div>
+                        <div class="vis-ti en">Smart Business Automation</div>
+                        <div class="vis-ti he">אוטומציה חכמה לעסק</div>
+                        <div class="vis-de en">A world where automation and AI replace manual work and become the norm in daily operations.</div>
+                        <div class="vis-de he">אוטומציה ובינה מלאכותית מחליפות עבודה ידנית והופכות לנורמה בתפעול היומיומי</div>
+                    </div>
+                    <div class="vis-card rev" data-d="2">
+                        <div class="vis-ico">
+                            <div class="ic-box blue"><i data-lucide="handshake"></i></div>
+                        </div>
+                        <div class="vis-ti en">Operational Growth Partner</div>
+                        <div class="vis-ti he">שותף תפעולי לצמיחה</div>
+                        <div class="vis-de en">An integrated automation service that lets businesses focus on management and growth.</div>
+                        <div class="vis-de he">שרות משולב אוטומציה המאפשר לעסקים להתמקד בניהול ובצמיחה</div>
+                    </div>
+                    <div class="vis-card rev" data-d="3">
+                        <div class="vis-ico">
+                            <div class="ic-box blue"><i data-lucide="building-2"></i></div>
+                        </div>
+                        <div class="vis-ti en">Chain-Level Standards for All</div>
+                        <div class="vis-ti he">חתירה לסטנדרט של הרשתות הגדולות</div>
+                        <div class="vis-de en">Advanced tools and technologies — once reserved for large chains — available to every business.</div>
+                        <div class="vis-de he">כלים וטכנולוגיות מתקדמות — שהיו נחלת הרשתות הגדולות — זמינים לכל עסק</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════ CONTACT ════ -->
+    <section id="contact">
+        <div class="section-wrap">
+            <div class="contact-inner">
+                <div class="contact-card rev">
+                    <div class="eyebrow rev en" style="margin-bottom:24px; color:#C8922A; --blue:#C8922A;">Contact Us</div>
+                    <div class="eyebrow rev he" style="margin-bottom:24px; color:#C8922A; --blue:#C8922A;">צרו קשר</div>
+                    <h2 class="en">Want to Move Forward<br>with Store Automation?</h2>
+                    <h2 class="he">רוצים להתקדם לאוטומציה בחנות?</h2>
+                    <p class="contact-sub en" style="white-space:nowrap;">Contact us to explore how Retailomatics can drive your business forward.</p>
+                    <p class="contact-sub he" style="white-space:nowrap;">צרו קשר בכדי לבדוק כיצד ריטיילומטיקס יכולה להוביל את העסק שלכם קדימה</p>
+                    <a href="mailto:shimri@retailomatics.com" class="contact-email" style="border-color:#C8922A; border-width:2px;"><i
+                            data-lucide="mail"></i><span>shimri@retailomatics.com</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════ FOOTER ════ -->
     <footer>
-        <p>&copy; 2025 Retailomatics · Retail Automation for SMBs</p>
+        <div class="foot-brand"><img id="nav-logo-en" class="nav-logo en" src="./assets/images/logo-en-black.png"
+                alt="Retailomatics" />
+            <img id="nav-logo-he" class="nav-logo he" src="./assets/images/logo-he-black.png" alt="ריטיילומטיקס" />
+        </div>
+        <div class="foot-copy"><span class="en">© 2025 Retailomatics · Smart Retail Automation</span><span class="he">©
+                2025 Retailomatics · אוטומציה חכמה לקמעונאות</span></div>
+        <div class="foot-links">
+            <a href="https://www.linkedin.com/company/retailomatics" target="_blank">LinkedIn</a>
+            <a href="mailto:shimri@retailomatics.com"><span class="en">Contact</span><span class="he">צרו קשר</span></a>
+       
+        </div>
     </footer>
 
-    <script>
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                
-                // Update active button
-                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Update content sections
-                document.querySelectorAll('.lang-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.querySelector(`.lang-section.lang-${lang}`).classList.add('active');
-                
-                // Update direction
-                if (lang === 'he') {
-                    document.body.style.direction = 'rtl';
-                    document.body.classList.remove('en');
-                } else {
-                    document.body.style.direction = 'ltr';
-                    document.body.classList.add('en');
-                }
-                
-                // Update header tagline
-                document.querySelectorAll('.tagline').forEach(t => t.style.display = 'none');
-                document.querySelector(`.tagline.lang-${lang}`).style.display = 'block';
-                
-                // Update contact section headings visibility
-                document.querySelectorAll('.contact h2').forEach(el => {
-                    if (el.classList.contains(`lang-${lang}`)) {
-                        el.style.display = 'block';
-                    } else {
-                        el.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
